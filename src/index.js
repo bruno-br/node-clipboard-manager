@@ -1,12 +1,12 @@
 import blessed from 'blessed'
-import { Table } from './widgets.js'
+import { table } from 'blessed-contrib'
 import { getClipboardHistory, updateClipboardHistory } from './clipboard_manager.js'
 
 const prefixLength = 4
 const maxValueLength = 20
 
 const screen = blessed.screen()
-const clipboardTable = Table({
+const clipboardTable = table({
   keys: true,
   vi: true,
   fg: 'white',
