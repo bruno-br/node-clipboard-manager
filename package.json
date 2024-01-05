@@ -7,10 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bruno Brasil",
   "license": "ISC",
   "dependencies": {
     "blessed": "^0.1.81",
-    "blessed-contrib": "^4.11.0"
+    "blessed-contrib": "^4.11.0",
+    "clipboardy": "^4.0.0"
   }
 }
