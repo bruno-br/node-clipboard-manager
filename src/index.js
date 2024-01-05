@@ -1,6 +1,6 @@
 import blessed from 'blessed'
 import { Table } from './widgets.js'
-import { getClipboardHistory } from './clipboard_manager.js'
+import { getClipboardHistory, updateClipboardHistory } from './clipboard_manager.js'
 
 const screen = blessed.screen()
 const clipboardTable = Table({
@@ -33,6 +33,8 @@ screen.key(['escape', 'q', 'C-c'], function (ch, key) {
 screen.render()
 
 function getClipboardTableData() {
+  updateClipboardHistory()
+
   const result = []
   const clipboardHistory = getClipboardHistory()
 

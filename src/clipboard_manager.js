@@ -7,11 +7,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const clipboard_history_path = path.resolve(__dirname, '../data/clipboard_history.json')
 
 export function getClipboardHistory() {
-  updateClipboardHistory()
   return importClipboardHistoryJson()
 }
 
-function updateClipboardHistory() {
+export function updateClipboardHistory() {
   const currClipboardValue = clipboard.readSync()
   const clipboard_history = importClipboardHistoryJson()
 
@@ -21,7 +20,7 @@ function updateClipboardHistory() {
   }
 
   const data = JSON.stringify([...clipboard_history, currClipboardValue])
-  fs.writeFileSync(clipboard_history_path, data, (data) => { console.log(err)})
+  fs.writeFileSync(clipboard_history_path, data, (err) => { console.log(err)})
 }
 
 function importClipboardHistoryJson(){
