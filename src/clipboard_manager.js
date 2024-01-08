@@ -11,19 +11,29 @@ export function getClipboardHistory() {
 }
 
 export function updateClipboardHistory() {
-  const currClipboardValue = clipboard.readSync()
   const clipboard_history = importClipboardHistoryJson()
+  const curr_clipboard_value = getCurrentClipboardValue()
 
-  if (clipboard_history.length > 0){
+  if (curr_clipboard_value.length == 0) return
+
+  if (clipboard_history.length == 0){
     const lastIndex = clipboard_history.length - 1
-    if (clipboard_history[lastIndex] == currClipboardValue) return
+    if (clipboard_history[lastIndex] == curr_clipboard_value) return
   }
 
-  const data = JSON.stringify([...clipboard_history, currClipboardValue])
-  fs.writeFileSync(clipboard_history_path, data, (err) => { console.log(err)})
+  const data = JSON.stringify([...clipboard_history, curr_clipboard_value])
+  fs.writeFileSync(clipboard_history_path, data, () => {})
 }
 
 function importClipboardHistoryJson(){
   const data = fs.readFileSync(clipboard_history_path)
   return JSON.parse(data)
+}
+
+function getCurrentClipboardValue(){
+  try {
+    return clipboard.readSync()
+  } catch (err) {
+    return ''
+  }
 }
