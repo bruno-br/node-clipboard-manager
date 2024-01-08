@@ -7,16 +7,19 @@ const maxValueLength = 20
 
 const screen = blessed.screen()
 const clipboardTable = table({
+  align: 'center',
+  top: 'center',
+  left: 'center',
   keys: true,
   vi: true,
   fg: 'white',
-  selectedFg: 'white',
-  selectedBg: 'blue',
+  selectedFg: 'black',
+  selectedBg: 'green',
   interactive: true,
   label: 'Clipboard History',
   width: '50%',
   height: '50%',
-  border: { type: "line", fg: "white" },
+  border: { type: "line", fg: "green" },
   columnSpacing: 4,
   columnWidth: [18, 36]
 })
@@ -42,8 +45,9 @@ function getClipboardTableData() {
   const clipboardHistory = getClipboardHistory()
 
   for (let count = 0; count < clipboardHistory.length; count++) {
+    const title = `[${count}] Clipboard ${count}`
     const value = formatClipboardValue(clipboardHistory[count])
-    result.push([`[${count}] Clipboard ${count}`, value])
+    result.push([title, value])
   }
 
   return result
