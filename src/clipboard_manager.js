@@ -34,6 +34,7 @@ function getCurrentClipboardValue(){
   try {
     return clipboard.readSync()
   } catch (err) {
+    console.error(err)
     return ''
   }
 }
