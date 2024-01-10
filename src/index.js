@@ -8,7 +8,6 @@ const maxValueLength = 20
 const screen = blessed.screen()
 const clipboardTable = table({
   align: 'center',
-  top: 'center',
   left: 'center',
   keys: true,
   vi: true,
@@ -17,8 +16,8 @@ const clipboardTable = table({
   selectedBg: 'green',
   interactive: true,
   label: 'Clipboard History',
-  width: '50%',
-  height: '50%',
+  width: '80%',
+  height: '80%',
   border: { type: "line", fg: "green" },
   columnSpacing: 4,
   columnWidth: [18, 36]
@@ -35,6 +34,25 @@ clipboardTable.setData({
 screen.key(['escape', 'q', 'C-c'], function (ch, key) {
   return process.exit(0)
 })
+
+const toolbarOptions = [
+  '[N] New Group',
+  '[S] Search',
+  '[C] Clear',
+  '[H] Help',
+  '[O] Options'
+]
+
+screen.append(blessed.text({
+  bottom: 2, 
+  fg: 'black',
+  bg: 'green',
+  tags: true,
+  align: 'center',
+  content: toolbarOptions.join('\t'),
+  left: 'center',
+  width: '100%'
+}))
 
 screen.render()
 
