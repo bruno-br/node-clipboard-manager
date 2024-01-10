@@ -14,23 +14,18 @@ export function updateClipboardHistory() {
   const clipboard_history = importClipboardHistoryJson()
   const curr_clipboard_value = getCurrentClipboardValue()
 
-  if (curr_clipboard_value.length == 0) return
-
-  if (clipboard_history.length == 0){
-    const lastIndex = clipboard_history.length - 1
-    if (clipboard_history[lastIndex] == curr_clipboard_value) return
+  if (curr_clipboard_value.length > 0 && !clipboard_history.includes(curr_clipboard_value)) {
+    const data = JSON.stringify([...clipboard_history, curr_clipboard_value])
+    fs.writeFileSync(clipboard_history_path, data, () => {})
   }
-
-  const data = JSON.stringify([...clipboard_history, curr_clipboard_value])
-  fs.writeFileSync(clipboard_history_path, data, () => {})
 }
 
-function importClipboardHistoryJson(){
+function importClipboardHistoryJson() {
   const data = fs.readFileSync(clipboard_history_path)
   return JSON.parse(data)
 }
 
-function getCurrentClipboardValue(){
+function getCurrentClipboardValue() {
   try {
     return clipboard.readSync()
   } catch (err) {
